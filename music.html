@@ -17,7 +17,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </head>
 
-<body class="page-music">
+<body class="page-music page-music-compact">
   <div id="cursor" aria-hidden="true"></div>
   <div id="cursor-ring" aria-hidden="true"></div>
   <div class="stars" id="stars" aria-hidden="true"></div>
@@ -42,49 +42,71 @@
 
   <main id="main" role="main">
     
-    <!-- Page Header -->
-    <section class="page-header">
-      <span class="page-header__label">Chapter IV</span>
-      <h1 class="page-header__title">The Soundtrack of Us</h1>
-      <div class="page-header__line"></div>
-    </section>
+    <!-- Compact Music Page Layout -->
+    <section class="music-compact-wrapper">
+      
+      <!-- Profile & Title -->
+      <div class="music-compact-header">
+        <div class="music-compact-photo">
+          <img src="https://i.pravatar.cc/300?img=68" alt="Kennedy & Joy Cecilia" />
+          <div class="photo-glow"></div>
+        </div>
+        <h1 class="music-compact-title">Kennedy & Joy Cecilia</h1>
+        <div class="music-compact-badges">
+          <span class="badge-compact">💛 Together</span>
+          <span class="badge-compact">✨ Forever</span>
+          <span class="badge-compact">🎵 Our Sound</span>
+        </div>
+      </div>
 
-    <!-- Music Player -->
-    <section class="music-section">
-      <div class="music-player">
-        <div class="music-player__vinyl" id="vinyl">
-          <div class="vinyl__grooves"></div>
-          <div class="vinyl__label"></div>
+      <!-- YouTube Frame - Visible on Load -->
+      <div class="current-vibe-section">
+        <div class="current-vibe-label">
+          <span>📼</span>
+          <span>OUR SOUNDTRACK</span>
         </div>
-        <div class="music-player__info">
-          <span class="music-player__now">Now Playing</span>
-          <h3 class="music-player__song" id="currentSong">Perfect</h3>
-          <p class="music-player__artist" id="currentArtist">Ed Sheeran</p>
+        
+        <div class="youtube-frame-wrapper" id="youtubeFrameWrapper">
+          <div id="yt-compact-player"></div>
         </div>
-        <div class="music-player__controls">
-          <button class="music-btn music-btn--prev" id="btnPrev" aria-label="Previous">
+        
+        <div class="now-playing-info">
+          <span class="now-playing-label">Now Playing</span>
+          <h3 class="now-playing-song" id="compactCurrentSong">Loading...</h3>
+          <p class="now-playing-artist" id="compactCurrentArtist">Please wait</p>
+        </div>
+        
+        <div class="compact-controls">
+          <button class="compact-btn" id="compactBtnPrev" aria-label="Previous">
             <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5"/></svg>
           </button>
-          <button class="music-btn" id="musicToggle" aria-label="Play/Pause">
+          <button class="compact-btn compact-btn--play" id="compactBtnPlay" aria-label="Play/Pause">
             <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" style="display:none"><rect x1="6" y1="4" width="4" height="16"/><rect x1="14" y1="4" width="4" height="16"/></svg>
           </button>
-          <button class="music-btn music-btn--next" id="btnNext" aria-label="Next">
+          <button class="compact-btn" id="compactBtnNext" aria-label="Next">
             <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/></svg>
           </button>
+        </div>
+        
+        <!-- Volume Control -->
+        <div class="volume-control-compact">
+          <svg class="volume-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+          </svg>
+          <input type="range" class="volume-slider" id="compactVolumeSlider" min="0" max="100" value="70" />
         </div>
       </div>
 
       <!-- Playlist -->
-      <div class="playlist">
-        <div class="playlist__inner" id="playlistInner"></div>
+      <div class="playlist-compact">
+        <div class="playlist-compact-inner" id="playlistCompactInner"></div>
       </div>
 
-      <!-- Hidden YouTube Player -->
-      <div id="yt-player" class="sr-only"></div>
     </section>
 
-    <!-- Return Home CTA -->
+    <!-- Return Home -->
     <section class="page-nav">
       <a href="index.html" class="page-nav__link">
         <span class="page-nav__label">Return to</span>
