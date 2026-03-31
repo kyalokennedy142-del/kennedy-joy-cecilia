@@ -334,7 +334,7 @@ memoryCards.forEach((card, i) => {
 });
 
 // ========================================
-// PAGE: MUSIC (COMPACT - Mercy Style)
+// PAGE: MUSIC (COMPACT - Fixed Version)
 // ========================================
 
 const youtubeFrameWrapper = document.getElementById('youtubeFrameWrapper');
@@ -347,15 +347,15 @@ const compactBtnNext = document.getElementById('compactBtnNext');
 const compactBtnPlay = document.getElementById('compactBtnPlay');
 const compactVolumeSlider = document.getElementById('compactVolumeSlider');
 
-// YOUR 10 REAL SONGS
+// YOUR PLAYLIST
 const playlistData = [
-  { title: 'Your Song Title', artist: 'Artist Name', duration: '—', emoji: '🌹', videoId: 'caoP4dj2oro' },
+  { title: 'New Song 1', artist: 'Artist', duration: '—', emoji: '🌹', videoId: 'caoP4dj2oro' },
   { title: 'Song 2', artist: 'Artist', duration: '—', emoji: '💛', videoId: 'Qk-ROQkkloE' },
   { title: 'Song 3', artist: 'Artist', duration: '—', emoji: '🕊️', videoId: '5mxT40MnNi0' },
   { title: 'Song 4', artist: 'Artist', duration: '—', emoji: '✨', videoId: 'Wkn2hqIo0iE' },
   { title: 'Song 5', artist: 'Artist', duration: '—', emoji: '🌙', videoId: 'C-YGWocw2TU' },
   { title: 'Song 6', artist: 'Artist', duration: '—', emoji: '🍂', videoId: 'RxctxSFp180' },
-  { title: 'Song 7', artist: 'Artist', duration: '—', emoji: '🌅', videoId: 'dPaTTIgcuho' },
+  { title: 'New Song 7', artist: 'Artist', duration: '—', emoji: '🌅', videoId: 'rL6wHfKQbMI' },
   { title: 'Song 8', artist: 'Artist', duration: '—', emoji: '⭐', videoId: '6mSaM5R0jao' },
   { title: 'Song 9', artist: 'Artist', duration: '—', emoji: '🎶', videoId: 'jlAQYRHggg4' },
   { title: 'Song 10', artist: 'Artist', duration: '—', emoji: '💫', videoId: '59Vf7oQV9pg' },
@@ -365,9 +365,14 @@ let currentTrackIndex = 0;
 let musicPlaying = false;
 let currentVolume = 70;
 let ytPlayerCompact;
+let isYouTubeAPIReady = false;
 
 // Build Playlist
-if (playlistCompactInner) {
+function buildPlaylist() {
+  if (!playlistCompactInner) return;
+  
+  playlistCompactInner.innerHTML = '';
+  
   playlistData.forEach((track, i) => {
     const item = document.createElement('div');
     item.className = 'playlist-item-compact' + (i === 0 ? ' is-active' : '');
@@ -409,50 +414,83 @@ if (playlistCompactInner) {
 
 // Load YouTube API
 function loadCompactYouTubeAPI() {
-  if (window.YT) {
-    initCompactYouTubePlayer();
+  // Check if API is already loaded
+  if (typeof YT !== 'undefined' && YT.Player) {
+    onYouTubeIframeAPIReady();
   } else {
-    const script = document.createElement('script');
-    script.src = 'https://www.youtube.com/iframe_api';
-    script.onload = initCompactYouTubePlayer;
-    document.head.appendChild(script);
+    // Load YouTube IFrame API
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
   }
 }
 
+// This function is called automatically by YouTube API when ready
+function onYouTubeIframeAPIReady() {
+  isYouTubeAPIReady = true;
+  initCompactYouTubePlayer();
+}
+
 function initCompactYouTubePlayer() {
-  ytPlayerCompact = new YT.Player('yt-compact-player', {
-    videoId: playlistData[0].videoId,
-    playerVars: {
-      autoplay: 1,
-      mute: 0,
-      controls: 1,
-      rel: 0,
-      modestbranding: 1
-    },
-    events: {
-      onReady: (e) => {
-        e.target.setVolume(currentVolume);
-        updateCompactNowPlaying(0);
-        musicPlaying = true;
-        updateCompactPlayButton();
+  if (!isYouTubeAPIReady || !ytCompactPlayer) {
+    console.log('YouTube API not ready yet, waiting...');
+    setTimeout(initCompactYouTubePlayer, 500);
+    return;
+  }
+  
+  try {
+    ytPlayerCompact = new YT.Player('yt-compact-player', {
+      videoId: playlistData[0].videoId,
+      playerVars: {
+        autoplay: 0,  // Start paused
+        mute: 0,
+        controls: 1,
+        rel: 0,
+        modestbranding: 1,
+        enablejsapi: 1
       },
-      onStateChange: (e) => {
-        if (e.data === YT.PlayerState.PLAYING) {
-          musicPlaying = true;
-          updateCompactPlayButton();
-        } else if (e.data === YT.PlayerState.PAUSED) {
-          musicPlaying = false;
-          updateCompactPlayButton();
-        } else if (e.data === YT.PlayerState.ENDED) {
-          // Auto-play next
+      events: {
+        onReady: (e) => {
+          console.log('YouTube player ready!');
+          e.target.setVolume(currentVolume);
+          updateCompactNowPlaying(0);
+          // Don't auto-play, wait for user interaction
+        },
+        onStateChange: (e) => {
+          if (e.data === YT.PlayerState.PLAYING) {
+            musicPlaying = true;
+            updateCompactPlayButton();
+          } else if (e.data === YT.PlayerState.PAUSED) {
+            musicPlaying = false;
+            updateCompactPlayButton();
+          } else if (e.data === YT.PlayerState.ENDED) {
+            console.log('Song ended, playing next...');
+            if (currentTrackIndex < playlistData.length - 1) {
+              loadCompactTrack(currentTrackIndex + 1);
+              playCompactMusic();
+            }
+          } else if (e.data === YT.PlayerState.ERROR) {
+            console.error('YouTube Error - skipping to next song');
+            if (currentTrackIndex < playlistData.length - 1) {
+              loadCompactTrack(currentTrackIndex + 1);
+              playCompactMusic();
+            }
+          }
+        },
+        onError: (e) => {
+          console.error('YouTube Player Error:', e.data);
           if (currentTrackIndex < playlistData.length - 1) {
             loadCompactTrack(currentTrackIndex + 1);
             playCompactMusic();
           }
         }
       }
-    }
-  });
+    });
+  } catch (error) {
+    console.error('Error creating YouTube player:', error);
+    setTimeout(initCompactYouTubePlayer, 1000);
+  }
 }
 
 function loadCompactTrack(index) {
@@ -468,6 +506,9 @@ function loadCompactTrack(index) {
   if (ytPlayerCompact && typeof ytPlayerCompact.loadVideoById === 'function') {
     ytPlayerCompact.loadVideoById(track.videoId);
     ytPlayerCompact.setVolume(currentVolume);
+  } else if (ytPlayerCompact && typeof ytPlayerCompact.cueVideoById === 'function') {
+    ytPlayerCompact.cueVideoById(track.videoId);
+    ytPlayerCompact.setVolume(currentVolume);
   }
   
   updateCompactNowPlaying(index);
@@ -480,18 +521,31 @@ function updateCompactNowPlaying(index) {
 }
 
 function playCompactMusic() {
-  if (!ytPlayerCompact) return;
-  ytPlayerCompact.playVideo();
-  ytPlayerCompact.unMute();
-  musicPlaying = true;
-  updateCompactPlayButton();
+  if (!ytPlayerCompact) {
+    console.log('Player not ready, loading...');
+    loadCompactYouTubeAPI();
+    return;
+  }
+  
+  if (typeof ytPlayerCompact.playVideo === 'function') {
+    ytPlayerCompact.playVideo();
+    ytPlayerCompact.unMute();
+    musicPlaying = true;
+    updateCompactPlayButton();
+  } else {
+    console.log('playVideo not available yet');
+    setTimeout(playCompactMusic, 500);
+  }
 }
 
 function pauseCompactMusic() {
   if (!ytPlayerCompact) return;
-  ytPlayerCompact.pauseVideo();
-  musicPlaying = false;
-  updateCompactPlayButton();
+  
+  if (typeof ytPlayerCompact.pauseVideo === 'function') {
+    ytPlayerCompact.pauseVideo();
+    musicPlaying = false;
+    updateCompactPlayButton();
+  }
 }
 
 function updateCompactPlayButton() {
@@ -499,12 +553,14 @@ function updateCompactPlayButton() {
   const playIcon = compactBtnPlay.querySelector('.icon-play');
   const pauseIcon = compactBtnPlay.querySelector('.icon-pause');
   
-  if (musicPlaying) {
-    playIcon.style.display = 'none';
-    pauseIcon.style.display = 'block';
-  } else {
-    playIcon.style.display = 'block';
-    pauseIcon.style.display = 'none';
+  if (playIcon && pauseIcon) {
+    if (musicPlaying) {
+      playIcon.style.display = 'none';
+      pauseIcon.style.display = 'block';
+    } else {
+      playIcon.style.display = 'block';
+      pauseIcon.style.display = 'none';
+    }
   }
 }
 
@@ -513,17 +569,14 @@ function toggleInlineVideo(parentItem, videoId) {
   let container = parentItem.querySelector('.inline-video-container');
   
   if (container && container.classList.contains('is-visible')) {
-    // Close video
     container.classList.remove('is-visible');
     setTimeout(() => container.remove(), 300);
   } else {
-    // Remove other open videos
     document.querySelectorAll('.inline-video-container.is-visible').forEach(el => {
       el.classList.remove('is-visible');
       setTimeout(() => el.remove(), 300);
     });
     
-    // Create new video container
     container = document.createElement('div');
     container.className = 'inline-video-container';
     container.innerHTML = `
@@ -539,11 +592,8 @@ function toggleInlineVideo(parentItem, videoId) {
     `;
     
     parentItem.appendChild(container);
-    
-    // Trigger animation
     setTimeout(() => container.classList.add('is-visible'), 10);
     
-    // Close button
     container.querySelector('.inline-video-close').addEventListener('click', () => {
       container.classList.remove('is-visible');
       setTimeout(() => container.remove(), 300);
@@ -551,10 +601,18 @@ function toggleInlineVideo(parentItem, videoId) {
   }
 }
 
+// Initialize on page load
+if (ytCompactPlayer) {
+  buildPlaylist();
+  loadCompactYouTubeAPI();
+}
+
 // Event Listeners
 if (compactBtnPlay) {
   compactBtnPlay.addEventListener('click', () => {
-    if (!ytPlayerCompact) loadCompactYouTubeAPI();
+    if (!isYouTubeAPIReady) {
+      loadCompactYouTubeAPI();
+    }
     musicPlaying ? pauseCompactMusic() : playCompactMusic();
   });
 }
@@ -585,9 +643,4 @@ if (compactVolumeSlider) {
       ytPlayerCompact.setVolume(currentVolume);
     }
   });
-}
-
-// Initialize on page load
-if (ytCompactPlayer) {
-  loadCompactYouTubeAPI();
 }
