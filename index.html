@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Kennedy & Joy Cecilia | Written in the Stars</title>
+  <meta name="description" content="A cinematic love story — Kennedy & Joy Cecilia" />
+  <meta name="theme-color" content="#0a0618" />
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet" />
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+  
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+
+<body class="page-home">
+  <!-- Decorative Layers -->
+  <div id="cursor" aria-hidden="true"></div>
+  <div id="cursor-ring" aria-hidden="true"></div>
+  <div class="stars" id="stars" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+  
+  <!-- Background Text -->
+  <div class="bg-text" aria-hidden="true">
+    <span class="bg-text__name bg-text__name--kennedy">KENNEDY</span>
+    <span class="bg-text__name bg-text__name--joy">JOY</span>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav__logo">
+      <a href="index.html">K <span class="nav__amp">&</span> J</a>
+    </div>
+    <ul class="nav__links">
+      <li><a href="index.html" class="nav__link nav__link--active">Home</a></li>
+      <li><a href="about.html" class="nav__link">Our Story</a></li>
+      <li><a href="profiles.html" class="nav__link">Us</a></li>
+      <li><a href="memories.html" class="nav__link">Memories</a></li>
+      <li><a href="music.html" class="nav__link">Music</a></li>
+    </ul>
+    <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!-- Main Content -->
+  <main id="main" role="main">
+    
+    <!-- HERO: Full Screen Split -->
+    <section class="hero" id="hero">
+      <div class="hero__split">
+        <div class="hero__side hero__side--left">
+          <div class="hero__image-wrap">
+            <img src="https://i.pravatar.cc/600?img=68" alt="Kennedy" class="hero__img hero__img--left" loading="eager" />
+            <div class="hero__overlay hero__overlay--left"></div>
+          </div>
+        </div>
+        <div class="hero__side hero__side--right">
+          <div class="hero__image-wrap">
+            <img src="https://i.pravatar.cc/600?img=47" alt="Joy Cecilia" class="hero__img hero__img--right" loading="eager" />
+            <div class="hero__overlay hero__overlay--right"></div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="hero__content">
+        <p class="hero__prelude">A story of two souls</p>
+        <h1 class="hero__title">
+          <span class="hero__title--kennedy">Kennedy</span>
+          <span class="hero__amp">&</span>
+          <span class="hero__title--joy">Joy Cecilia</span>
+        </h1>
+        <p class="hero__tagline">Written in the stars, sealed with a heartbeat</p>
+        
+        <div class="hero__cta">
+          <a href="about.html" class="btn btn--primary">Begin Our Story</a>
+        </div>
+      </div>
+      
+      <div class="hero__scroll-indicator">
+        <span>Scroll to explore</span>
+        <div class="hero__scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- Quick Links Section -->
+    <section class="quick-links" id="quickLinks">
+      <div class="quick-links__grid">
+        <a href="about.html" class="quick-link">
+          <span class="quick-link__number">01</span>
+          <span class="quick-link__title">Our Story</span>
+          <span class="quick-link__arrow">→</span>
+        </a>
+        <a href="profiles.html" class="quick-link">
+          <span class="quick-link__number">02</span>
+          <span class="quick-link__title">Two Hearts</span>
+          <span class="quick-link__arrow">→</span>
+        </a>
+        <a href="memories.html" class="quick-link">
+          <span class="quick-link__number">03</span>
+          <span class="quick-link__title">Memories</span>
+          <span class="quick-link__arrow">→</span>
+        </a>
+        <a href="music.html" class="quick-link">
+          <span class="quick-link__number">04</span>
+          <span class="quick-link__title">Our Sound</span>
+          <span class="quick-link__arrow">→</span>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer__content">
+      <p class="footer__text">Made with love for <strong>Kennedy</strong> &amp; <strong>Joy Cecilia</strong></p>
+      <p class="footer__sub">Every love story is beautiful — but ours is my favourite.</p>
+      <small>© <span id="year"></span></small>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script src="assets/js/script.js" defer></script>
+</body>
+</html>
