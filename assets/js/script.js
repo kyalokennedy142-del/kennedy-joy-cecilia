@@ -677,8 +677,7 @@ if (countdownTimer) {
 // ========================================
 // HOME PAGE: HORIZONTAL GALLERY SCROLL
 // ========================================
-
-const galleryScrollInner = document.getElementById('galleryScrollInner');
+let galleryScrollInner = document.getElementById('galleryScrollInner');
 
 if (galleryScrollInner) {
   // Enable smooth horizontal scroll with mouse drag
@@ -906,5 +905,166 @@ document.querySelectorAll('input[type="file"]').forEach(input => {
     };
     
     reader.readAsDataURL(this.files[0]);
+  });
+});
+
+// ========================================
+// MEMORIES PAGE: GALLERY & LIGHTBOX
+// ========================================
+galleryScrollInner = document.getElementById('galleryScrollInner');
+const lightbox = document.getElementById('lightbox');
+const lightboxOverlay = document.getElementById('lightboxOverlay');
+const lightboxClose = document.getElementById('lightboxClose');
+const lightboxImage = document.getElementById('lightboxImage');
+const lightboxDate = document.getElementById('lightboxDate');
+const lightboxCaption = document.getElementById('lightboxCaption');
+const lightboxPrev = document.getElementById('lightboxPrev');
+const lightboxNext = document.getElementById('lightboxNext');
+
+let currentLightboxIndex = 0;
+const galleryItems = document.querySelectorAll('.gallery-scroll-item[data-lightbox]');
+
+// Horizontal scroll with drag
+if (galleryScrollInner) {
+  let isDown = false;
+  let startX, scrollLeft;
+  
+  galleryScrollInner.addEventListener('mousedown', (e) => {
+    isDown = true;
+    galleryScrollInner.style.cursor = 'grabbing';
+    startX = e.pageX - galleryScrollInner.offsetLeft;
+    scrollLeft = galleryScrollInner.scrollLeft;
+  });
+  
+  galleryScrollInner.addEventListener('mouseleave', () => {
+    isDown = false;
+    galleryScrollInner.style.cursor = 'grab';
+  });
+  
+  galleryScrollInner.addEventListener('mouseup', () => {
+    isDown = false;
+    galleryScrollInner.style.cursor = 'grab';
+  });
+  
+  galleryScrollInner.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - galleryScrollInner.offsetLeft;
+    const walk = (x - startX) * 2;
+    galleryScrollInner.scrollLeft = scrollLeft - walk;
+  });
+  
+  // Touch support
+  galleryScrollInner.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].pageX - galleryScrollInner.offsetLeft;
+    scrollLeft = galleryScrollInner.scrollLeft;
+  });
+  
+  galleryScrollInner.addEventListener('touchmove', (e) => {
+    const x = e.touches[0].pageX - galleryScrollInner.offsetLeft;
+    const walk = (x - startX) * 2;
+    galleryScrollInner.scrollLeft = scrollLeft - walk;
+  });
+}
+
+// Open lightbox
+function openLightbox(index) {
+  const item = galleryItems[index];
+  if (!item) return;
+  
+  const img = item.querySelector('.gallery-scroll-img');
+  const date = item.querySelector('.gallery-scroll-date')?.textContent || '';
+  const caption = item.querySelector('.gallery-scroll-caption')?.textContent || '';
+  
+  lightboxImage.src = img.src;
+  lightboxImage.alt = img.alt;
+  lightboxDate.textContent = date;
+  lightboxCaption.textContent = caption;
+  currentLightboxIndex = index;
+  
+  lightbox.classList.add('is-visible');
+  lightbox.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+
+// Close lightbox
+function closeLightbox() {
+  lightbox.classList.remove('is-visible');
+  lightbox.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+  setTimeout(() => {
+    lightboxImage.src = '';
+  }, 300);
+}
+
+// Navigate lightbox
+function navigateLightbox(direction) {
+  currentLightboxIndex += direction;
+  if (currentLightboxIndex < 0) currentLightboxIndex = galleryItems.length - 1;
+  if (currentLightboxIndex >= galleryItems.length) currentLightboxIndex = 0;
+  openLightbox(currentLightboxIndex);
+}
+
+// Event listeners for gallery items
+galleryItems.forEach((item, index) => {
+  item.addEventListener('click', () => openLightbox(index));
+  item.querySelector('.gallery-scroll-zoom')?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    openLightbox(index);
+  });
+});
+
+// Lightbox controls
+if (lightboxOverlay) {
+  lightboxOverlay.addEventListener('click', closeLightbox);
+}
+if (lightboxClose) {
+  lightboxClose.addEventListener('click', closeLightbox);
+}
+if (lightboxPrev) {
+  lightboxPrev.addEventListener('click', () => navigateLightbox(-1));
+}
+if (lightboxNext) {
+  lightboxNext.addEventListener('click', () => navigateLightbox(1));
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+  if (!lightbox.classList.contains('is-visible')) return;
+  
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') navigateLightbox(-1);
+  if (e.key === 'ArrowRight') navigateLightbox(1);
+});
+
+// Animate gallery items on scroll
+gsap.utils.toArray('.gallery-scroll-item').forEach((item, i) => {
+  gsap.from(item, {
+    opacity: 0,
+    scale: 0.9,
+    duration: 0.8,
+    delay: i * 0.1,
+    ease: 'power3.out',
+    scrollTrigger: {
+      trigger: item,
+      start: 'top 90%',
+      toggleActions: 'play none none reverse'
+    }
+  });
+});
+
+// Animate stats
+gsap.utils.toArray('.gallery-stat-card').forEach((stat, i) => {
+  gsap.from(stat, {
+    opacity: 0,
+    y: 30,
+    duration: 0.8,
+    delay: i * 0.15,
+    ease: 'power3.out',
+    scrollTrigger: {
+      trigger: stat,
+      start: 'top 85%',
+      toggleActions: 'play none none reverse'
+    }
   });
 });
