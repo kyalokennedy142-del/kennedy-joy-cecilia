@@ -45,71 +45,294 @@
     <!-- Page Header -->
     <section class="page-header">
       <span class="page-header__label">Chapter II</span>
-      <h1 class="page-header__title">Two Hearts, One Rhythm</h1>
+      <h1 class="page-header__title">Two Hearts, One Soul</h1>
+      <p class="page-header__subtitle">Individually beautiful, together unstoppable</p>
       <div class="page-header__line"></div>
     </section>
 
-    <!-- Bento Grid Profiles -->
-    <section class="profiles-section">
-      <div class="bento-grid">
-        
-        <!-- Kennedy Card -->
-        <article class="bento-card bento-card--large">
-          <div class="bento-card__image">
-            <img src="https://i.pravatar.cc/600?img=68" alt="Kennedy" loading="lazy" id="photoKennedy" />
-            <label class="photo-upload" for="uploadKennedy" title="Change photo">✎</label>
-            <input type="file" id="uploadKennedy" accept="image/*" class="sr-only" data-target="photoKennedy" />
-          </div>
-          <div class="bento-card__content">
-            <h3>Kennedy</h3>
-            <p class="bento-card__role">Him</p>
-            <blockquote class="bento-card__quote">
-              <p>She is my calm in every storm, the gold thread woven through every chapter of my life.</p>
-            </blockquote>
-          </div>
-        </article>
-        
-        <!-- Joy Cecilia Card -->
-        <article class="bento-card bento-card--tall">
-          <div class="bento-card__image">
-            <img src="https://i.pravatar.cc/600?img=47" alt="Joy Cecilia" loading="lazy" id="photoJoy" />
-            <label class="photo-upload" for="uploadJoy" title="Change photo">✎</label>
-            <input type="file" id="uploadJoy" accept="image/*" class="sr-only" data-target="photoJoy" />
-          </div>
-          <div class="bento-card__content">
-            <h3>Joy Cecilia</h3>
-            <p class="bento-card__role">Her</p>
-            <blockquote class="bento-card__quote">
-              <p>He made the universe rearrange itself into something beautiful.</p>
-            </blockquote>
-          </div>
-        </article>
-        
-        <!-- Together Card -->
-        <article class="bento-card bento-card--small">
-          <div class="bento-card__icon">💛</div>
-          <div class="bento-card__content">
-            <h3>Together</h3>
-            <p>Every moment, amplified.</p>
-          </div>
-        </article>
-        
-        <!-- Forever Card -->
-        <article class="bento-card bento-card--small">
-          <div class="bento-card__icon">✨</div>
-          <div class="bento-card__content">
-            <h3>Forever</h3>
-            <p>Just the beginning.</p>
-          </div>
-        </article>
-        
+    <!-- COUPLE STATS BAR -->
+    <section class="couple-stats">
+      <div class="stats-container">
+        <div class="stat-box">
+          <span class="stat-icon">💛</span>
+          <span class="stat-value">13+ Years</span>
+          <span class="stat-label">Together</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-icon">✨</span>
+          <span class="stat-value">4,745+</span>
+          <span class="stat-label">Days of Love</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-icon">🎵</span>
+          <span class="stat-value">∞</span>
+          <span class="stat-label">Memories</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-icon">💕</span>
+          <span class="stat-value">Forever</span>
+          <span class="stat-label">To Go</span>
+        </div>
       </div>
     </section>
 
-    <!-- Next Page CTA -->
+    <!-- MAIN PROFILE CARDS -->
+    <section class="profiles-main">
+      <div class="profiles-grid">
+        
+        <!-- KENNEDY CARD -->
+        <article class="profile-card profile-card--kennedy" id="kennedyCard">
+          <div class="profile-card__glow"></div>
+          
+          <div class="profile-card__photo-section">
+            <div class="profile-card__photo-frame">
+              <img src="https://i.pravatar.cc/600?img=68" alt="Kennedy" class="profile-card__photo" id="photoKennedy" loading="lazy" />
+              <div class="profile-card__photo-overlay"></div>
+              <label class="profile-card__upload" for="uploadKennedy" title="Change photo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="17 8 12 3 7 8"/>
+                  <line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+                <span>Change Photo</span>
+              </label>
+              <input type="file" id="uploadKennedy" accept="image/*" class="sr-only" data-target="photoKennedy" />
+            </div>
+            <div class="profile-card__number">01</div>
+          </div>
+          
+          <div class="profile-card__content">
+            <div class="profile-card__header">
+              <h2 class="profile-card__name">Kennedy</h2>
+              <span class="profile-card__role">Him · The Protector</span>
+            </div>
+            
+            <div class="profile-card__about">
+              <p class="profile-card__text">
+                I'm the calm in her storm, the steady hand when the world gets loud. 
+                I believe in love that lasts forever, in promises kept, and in choosing 
+                the same person every single day.
+              </p>
+            </div>
+            
+            <div class="profile-card__traits">
+              <div class="trait-item">
+                <span class="trait-icon">🌙</span>
+                <span class="trait-text">Night Owl</span>
+              </div>
+              <div class="trait-item">
+                <span class="trait-icon">⚽</span>
+                <span class="trait-text">Arsenal Fan</span>
+              </div>
+              <div class="trait-item">
+                <span class="trait-icon">🎵</span>
+                <span class="trait-text">Music Lover</span>
+              </div>
+              <div class="trait-item">
+                <span class="trait-icon">💪</span>
+                <span class="trait-text">Her Protector</span>
+              </div>
+            </div>
+            
+            <div class="profile-card__quote">
+              <span class="quote-mark">"</span>
+              <p>She is my calm in every storm, the gold thread woven through every chapter of my life.</p>
+              <span class="quote-mark quote-mark--close">"</span>
+            </div>
+            
+            <div class="profile-card__love-note">
+              <span class="love-note-label">To My Love</span>
+              <p class="love-note-text">
+                "Joy, you are everything I never knew I needed. Every day with you is a gift I don't take for granted. I choose you, today and always." 💛
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <!-- CENTER HEART DECORATION -->
+        <div class="profiles__heart-centre" aria-hidden="true">
+          <div class="profiles__heart-icon">
+            <svg viewBox="0 0 60 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M30 52S2 35 2 17A14 14 0 0 1 30 9a14 14 0 0 1 28 8C58 35 30 52 30 52z" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <span class="profiles__forever">Forever</span>
+          <div class="heart-pulse"></div>
+        </div>
+
+        <!-- JOY CECILIA CARD -->
+        <article class="profile-card profile-card--joy" id="joyCard">
+          <div class="profile-card__glow"></div>
+          
+          <div class="profile-card__photo-section">
+            <div class="profile-card__photo-frame">
+              <img src="https://i.pravatar.cc/600?img=47" alt="Joy Cecilia" class="profile-card__photo" id="photoJoy" loading="lazy" />
+              <div class="profile-card__photo-overlay"></div>
+              <label class="profile-card__upload" for="uploadJoy" title="Change photo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="17 8 12 3 7 8"/>
+                  <line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+                <span>Change Photo</span>
+              </label>
+              <input type="file" id="uploadJoy" accept="image/*" class="sr-only" data-target="photoJoy" />
+            </div>
+            <div class="profile-card__number">02</div>
+          </div>
+          
+          <div class="profile-card__content">
+            <div class="profile-card__header">
+              <h2 class="profile-card__name">Joy Cecilia</h2>
+              <span class="profile-card__role">Her · The Light</span>
+            </div>
+            
+            <div class="profile-card__about">
+              <p class="profile-card__text">
+                I'm the spark in his darkness, the reason his world became colorful. 
+                I believe in love that transforms, in dreams that come true, and in 
+                a love story that never ends.
+              </p>
+            </div>
+            
+            <div class="profile-card__traits">
+              <div class="trait-item">
+                <span class="trait-icon">☀️</span>
+                <span class="trait-text">Early Bird</span>
+              </div>
+              <div class="trait-item">
+                <span class="trait-icon">💻</span>
+                <span class="trait-text">Developer</span>
+              </div>
+              <div class="trait-item">
+                <span class="trait-icon">✨</span>
+                <span class="trait-text">Dreamer</span>
+              </div>
+              <div class="trait-item">
+                <span class="trait-icon">💛</span>
+                <span class="trait-text">His Peace</span>
+              </div>
+            </div>
+            
+            <div class="profile-card__quote">
+              <span class="quote-mark">"</span>
+              <p>He made the universe rearrange itself into something beautiful.</p>
+              <span class="quote-mark quote-mark--close">"</span>
+            </div>
+            
+            <div class="profile-card__love-note">
+              <span class="love-note-label">To My Love</span>
+              <p class="love-note-text">
+                "Kennedy, you walked into my world and made everything make sense. You are my home, my heart, my forever." ✨
+              </p>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- WHY WE WORK SECTION -->
+    <section class="compatibility-section">
+      <div class="compatibility-header">
+        <span class="compatibility-label">Perfect Balance</span>
+        <h2 class="compatibility-title">Why We Work</h2>
+        <p class="compatibility-subtitle">Two halves of one beautiful whole</p>
+      </div>
+      
+      <div class="compatibility-grid">
+        <div class="compatibility-item">
+          <div class="compatibility-icon">🌙</div>
+          <div class="compatibility-text">
+            <span class="compatibility-person">Kennedy</span>
+            <span class="compatibility-trait">The Night</span>
+          </div>
+          <div class="compatibility-connector">+</div>
+          <div class="compatibility-text">
+            <span class="compatibility-person">Joy</span>
+            <span class="compatibility-trait">The Day</span>
+          </div>
+          <div class="compatibility-result">= Eternal</div>
+        </div>
+        
+        <div class="compatibility-item">
+          <div class="compatibility-icon">🛡️</div>
+          <div class="compatibility-text">
+            <span class="compatibility-person">Kennedy</span>
+            <span class="compatibility-trait">The Protector</span>
+          </div>
+          <div class="compatibility-connector">+</div>
+          <div class="compatibility-text">
+            <span class="compatibility-person">Joy</span>
+            <span class="compatibility-trait">The Nurturer</span>
+          </div>
+          <div class="compatibility-result">= Safe Haven</div>
+        </div>
+        
+        <div class="compatibility-item">
+          <div class="compatibility-icon">🎵</div>
+          <div class="compatibility-text">
+            <span class="compatibility-person">Kennedy</span>
+            <span class="compatibility-trait">The Listener</span>
+          </div>
+          <div class="compatibility-connector">+</div>
+          <div class="compatibility-text">
+            <span class="compatibility-person">Joy</span>
+            <span class="compatibility-trait">The Speaker</span>
+          </div>
+          <div class="compatibility-result">= Perfect Harmony</div>
+        </div>
+        
+        <div class="compatibility-item">
+          <div class="compatibility-icon">💭</div>
+          <div class="compatibility-text">
+            <span class="compatibility-person">Kennedy</span>
+            <span class="compatibility-trait">The Dreamer</span>
+          </div>
+          <div class="compatibility-connector">+</div>
+          <div class="compatibility-text">
+            <span class="compatibility-person">Joy</span>
+            <span class="compatibility-trait">The Builder</span>
+          </div>
+          <div class="compatibility-result">= Reality</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OUR PROMISES SECTION -->
+    <section class="promises-section">
+      <div class="promises-header">
+        <span class="promises-label">Our Vows</span>
+        <h2 class="promises-title">Promises to Each Other</h2>
+      </div>
+      
+      <div class="promises-grid">
+        <div class="promise-card">
+          <div class="promise-icon">💛</div>
+          <h3 class="promise-title">Kennedy's Promise</h3>
+          <p class="promise-text">
+            "I promise to always be your safe place, your biggest supporter, 
+            and your home. I promise to choose you, every single day, for 
+            all the days of my life."
+          </p>
+        </div>
+        
+        <div class="promise-card">
+          <div class="promise-icon">✨</div>
+          <h3 class="promise-title">Joy's Promise</h3>
+          <p class="promise-text">
+            "I promise to always believe in you, to stand by your side 
+            through everything, and to love you more with each passing day. 
+            You are my forever."
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Next Chapter Navigation -->
     <section class="page-nav">
       <a href="memories.html" class="page-nav__link">
-        <span class="page-nav__label">Next Chapter</span>
+        <span class="page-nav__label">Continue Our Journey</span>
         <span class="page-nav__title">Captured Moments →</span>
       </a>
     </section>
@@ -119,6 +342,7 @@
   <footer class="footer">
     <div class="footer__content">
       <p class="footer__text">Made with love for <strong>Kennedy</strong> &amp; <strong>Joy Cecilia</strong></p>
+      <p class="footer__sub">Every love story is beautiful — but ours is my favourite.</p>
       <small>© <span id="year"></span></small>
     </div>
   </footer>

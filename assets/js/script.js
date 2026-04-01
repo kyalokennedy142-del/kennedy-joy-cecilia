@@ -804,3 +804,107 @@ if (loveLetter) {
     }
   });
 }
+// ========================================
+// PROFILES PAGE: ANIMATIONS
+// ========================================
+
+// Animate profile cards on scroll
+gsap.utils.toArray('.profile-card').forEach((card, i) => {
+  gsap.from(card, {
+    opacity: 0,
+    y: 50,
+    duration: 1,
+    delay: i * 0.2,
+    ease: 'power3.out',
+    scrollTrigger: {
+      trigger: card,
+      start: 'top 85%',
+      toggleActions: 'play none none reverse'
+    }
+  });
+});
+
+// Animate heart pulse
+const heartIcon = document.querySelector('.profiles__heart-icon');
+if (heartIcon) {
+  gsap.to(heartIcon, {
+    scale: 1.1,
+    duration: 1.2,
+    repeat: -1,
+    yoyo: true,
+    ease: 'sine.inOut'
+  });
+}
+
+// Animate stats
+gsap.utils.toArray('.stat-box').forEach((stat, i) => {
+  gsap.from(stat, {
+    opacity: 0,
+    y: 30,
+    duration: 0.8,
+    delay: i * 0.15,
+    ease: 'power3.out',
+    scrollTrigger: {
+      trigger: stat,
+      start: 'top 90%',
+      toggleActions: 'play none none reverse'
+    }
+  });
+});
+
+// Animate compatibility items
+gsap.utils.toArray('.compatibility-item').forEach((item, i) => {
+  gsap.from(item, {
+    opacity: 0,
+    x: i % 2 === 0 ? -30 : 30,
+    duration: 0.8,
+    delay: i * 0.15,
+    ease: 'power3.out',
+    scrollTrigger: {
+      trigger: item,
+      start: 'top 90%',
+      toggleActions: 'play none none reverse'
+    }
+  });
+});
+
+// Animate promise cards
+gsap.utils.toArray('.promise-card').forEach((card, i) => {
+  gsap.from(card, {
+    opacity: 0,
+    y: 40,
+    duration: 1,
+    delay: i * 0.2,
+    ease: 'power3.out',
+    scrollTrigger: {
+      trigger: card,
+      start: 'top 85%',
+      toggleActions: 'play none none reverse'
+    }
+  });
+});
+
+// Photo upload functionality (already in script.js, but ensure it works)
+document.querySelectorAll('input[type="file"]').forEach(input => {
+  input.addEventListener('change', function() {
+    if (!this.files[0]) return;
+    
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const targetId = this.dataset.target || this.id.replace('upload', 'photo');
+      const img = document.getElementById(targetId);
+      
+      if (img) {
+        img.style.opacity = '0';
+        img.style.transition = 'opacity 0.4s ease';
+        
+        setTimeout(() => {
+          img.src = e.target.result;
+          img.style.opacity = '1';
+        }, 200);
+      }
+    };
+    
+    reader.readAsDataURL(this.files[0]);
+  });
+});
