@@ -644,3 +644,163 @@ if (compactVolumeSlider) {
     }
   });
 }
+// ========================================
+// HOME PAGE: COUNTDOWN TIMER
+// ========================================
+
+const countdownTimer = document.getElementById('countdownTimer');
+
+if (countdownTimer) {
+  // Set your start date: June 1, 2012
+  const startDate = new Date('2012-06-01T00:00:00');
+  
+  function updateCountdown() {
+    const now = new Date();
+    const diff = now - startDate;
+    
+    const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
+    const days = Math.floor((diff % (1000 * 60 * 60 * 24 * 365.25)) / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    
+    document.getElementById('countYears').textContent = years;
+    document.getElementById('countDays').textContent = days;
+    document.getElementById('countHours').textContent = hours;
+    document.getElementById('countMinutes').textContent = minutes;
+  }
+  
+  // Update immediately, then every minute
+  updateCountdown();
+  setInterval(updateCountdown, 60000);
+}
+
+// ========================================
+// HOME PAGE: HORIZONTAL GALLERY SCROLL
+// ========================================
+
+const galleryScrollInner = document.getElementById('galleryScrollInner');
+
+if (galleryScrollInner) {
+  // Enable smooth horizontal scroll with mouse drag
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+  
+  galleryScrollInner.addEventListener('mousedown', (e) => {
+    isDown = true;
+    galleryScrollInner.style.cursor = 'grabbing';
+    startX = e.pageX - galleryScrollInner.offsetLeft;
+    scrollLeft = galleryScrollInner.scrollLeft;
+  });
+  
+  galleryScrollInner.addEventListener('mouseleave', () => {
+    isDown = false;
+    galleryScrollInner.style.cursor = 'grab';
+  });
+  
+  galleryScrollInner.addEventListener('mouseup', () => {
+    isDown = false;
+    galleryScrollInner.style.cursor = 'grab';
+  });
+  
+  galleryScrollInner.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - galleryScrollInner.offsetLeft;
+    const walk = (x - startX) * 2;
+    galleryScrollInner.scrollLeft = scrollLeft - walk;
+  });
+  
+  // Touch support for mobile
+  galleryScrollInner.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].pageX - galleryScrollInner.offsetLeft;
+    scrollLeft = galleryScrollInner.scrollLeft;
+  });
+  
+  galleryScrollInner.addEventListener('touchmove', (e) => {
+    const x = e.touches[0].pageX - galleryScrollInner.offsetLeft;
+    const walk = (x - startX) * 2;
+    galleryScrollInner.scrollLeft = scrollLeft - walk;
+  });
+}
+
+// ========================================
+// HOME PAGE: BADGES HOVER EFFECT
+// ========================================
+
+document.querySelectorAll('.badge-item').forEach(badge => {
+  badge.addEventListener('mouseenter', () => {
+    document.body.classList.add('hovering');
+  });
+  badge.addEventListener('mouseleave', () => {
+    document.body.classList.remove('hovering');
+  });
+});
+
+// ========================================
+// ABOUT PAGE: STORY SECTIONS ANIMATION
+// ========================================
+
+// Animate story sections on scroll
+gsap.utils.toArray('.story-section').forEach((section, i) => {
+  const content = section.querySelector('.story-content');
+  const visual = section.querySelector('.story-visual');
+  
+  if (content && visual) {
+    gsap.from(content, {
+      opacity: 0,
+      x: i % 2 === 0 ? -50 : 50,
+      duration: 1.2,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: section,
+        start: 'top 80%',
+        toggleActions: 'play none none reverse'
+      }
+    });
+    
+    gsap.from(visual, {
+      opacity: 0,
+      x: i % 2 === 0 ? 50 : -50,
+      duration: 1.2,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: section,
+        start: 'top 80%',
+        toggleActions: 'play none none reverse'
+      }
+    });
+  }
+});
+
+// Animate stats
+gsap.utils.toArray('.stat-item').forEach((stat, i) => {
+  gsap.from(stat, {
+    opacity: 0,
+    y: 30,
+    duration: 0.8,
+    delay: i * 0.2,
+    ease: 'power3.out',
+    scrollTrigger: {
+      trigger: stat,
+      start: 'top 85%',
+      toggleActions: 'play none none reverse'
+    }
+  });
+});
+
+// Animate love letter
+const loveLetter = document.querySelector('.story-love-letter');
+if (loveLetter) {
+  gsap.from(loveLetter, {
+    opacity: 0,
+    scale: 0.95,
+    duration: 1,
+    ease: 'power3.out',
+    scrollTrigger: {
+      trigger: loveLetter,
+      start: 'top 80%',
+      toggleActions: 'play none none reverse'
+    }
+  });
+}

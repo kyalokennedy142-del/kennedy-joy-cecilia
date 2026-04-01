@@ -1702,3 +1702,623 @@ body::after {
     margin-top: 0.5rem;
   }
 }
+/* ========================================
+   HOME PAGE UPGRADES
+   Countdown • Badges • Horizontal Gallery • Welcome
+   ======================================== */
+
+/* ========== COUNTDOWN SECTION ========== */
+.countdown-section {
+  padding: 5rem 2rem;
+  background: linear-gradient(180deg, transparent, rgba(255,255,255,0.02), transparent);
+}
+
+.countdown-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.countdown-label {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--glow-gold);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.countdown-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 300;
+  color: var(--text-main);
+  margin-bottom: 2rem;
+}
+
+.countdown-timer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.countdown-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  min-width: 80px;
+}
+
+.countdown-number {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 400;
+  color: var(--glow-pink);
+  line-height: 1;
+}
+
+.countdown-text {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 0.3rem;
+}
+
+.countdown-separator {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--glow-gold);
+  opacity: 0.6;
+}
+
+.countdown-quote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  color: var(--text-soft);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* ========== BADGES SECTION ========== */
+.badges-section {
+  padding: 4rem 2rem;
+}
+
+.badges-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.badges-label {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--glow-purple);
+  display: block;
+  margin-bottom: 2rem;
+}
+
+.badges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.badge-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  transition: all 0.3s var(--ease-out);
+}
+
+.badge-item:hover {
+  border-color: var(--glow-gold);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.badge-icon {
+  font-size: 2rem;
+}
+
+.badge-text {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-soft);
+  text-align: center;
+}
+
+/* ========== HORIZONTAL SCROLL GALLERY ========== */
+.gallery-scroll-section {
+  padding: 5rem 0;
+  background: linear-gradient(180deg, transparent, rgba(255,255,255,0.02), transparent);
+}
+
+.gallery-scroll-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 0 2rem;
+}
+
+.gallery-scroll-label {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--glow-purple);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.gallery-scroll-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 300;
+  background: linear-gradient(135deg, var(--text-main) 50%, var(--glow-pink));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.5rem;
+}
+
+.gallery-scroll-subtitle {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  letter-spacing: 0.15em;
+}
+
+.gallery-scroll-container {
+  overflow: hidden;
+  padding: 1rem 0;
+}
+
+.gallery-scroll-inner {
+  display: flex;
+  gap: 1.5rem;
+  padding: 0 2rem;
+  scroll-snap-type: x mandatory;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.gallery-scroll-inner::-webkit-scrollbar {
+  display: none;
+}
+
+.gallery-scroll-item {
+  position: relative;
+  flex: 0 0 280px;
+  height: 360px;
+  border-radius: 20px;
+  overflow: hidden;
+  scroll-snap-align: center;
+  border: 1px solid var(--border);
+  transition: transform 0.4s var(--ease-out);
+  cursor: none;
+}
+
+.gallery-scroll-item:hover {
+  transform: scale(1.03);
+}
+
+.gallery-scroll-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease-out);
+}
+
+.gallery-scroll-item:hover img {
+  transform: scale(1.08);
+}
+
+.gallery-scroll-item figcaption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.2rem;
+  background: linear-gradient(to top, rgba(4,1,14,0.95), transparent);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--text-soft);
+  letter-spacing: 0.05em;
+  transform: translateY(10px);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.gallery-scroll-item:hover figcaption {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.gallery-scroll-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(255,95,160,0.1), rgba(176,110,243,0.1));
+  border: 1px solid rgba(255,95,160,0.2);
+}
+
+.gallery-scroll-cta-content {
+  text-align: center;
+  padding: 2rem;
+}
+
+.gallery-scroll-cta-icon {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.gallery-scroll-cta-text {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--text-main);
+  margin-bottom: 0.5rem;
+}
+
+.gallery-scroll-cta-sub {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--text-soft);
+}
+
+/* ========== WELCOME MESSAGE SECTION ========== */
+.welcome-section {
+  padding: 6rem 2rem;
+}
+
+.welcome-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.welcome-message {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  font-style: italic;
+  color: var(--text-soft);
+  line-height: 1.9;
+  margin-bottom: 2.5rem;
+}
+
+.welcome-message cite {
+  display: block;
+  margin-top: 1.5rem;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--glow-gold);
+  font-style: normal;
+  letter-spacing: 0.15em;
+}
+
+.btn--secondary {
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  background: transparent;
+  color: var(--glow-gold);
+  text-decoration: none;
+  border: 1px solid var(--glow-gold);
+  border-radius: 50px;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.btn--secondary:hover {
+  background: var(--glow-gold);
+  color: var(--black);
+  transform: translateY(-3px);
+  box-shadow: 0 0 25px rgba(201, 168, 76, 0.4);
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  .countdown-timer {
+    gap: 0.5rem;
+  }
+  
+  .countdown-item {
+    padding: 0.8rem 1rem;
+    min-width: 65px;
+  }
+  
+  .countdown-number {
+    font-size: 1.3rem;
+  }
+  
+  .countdown-text {
+    font-size: 0.6rem;
+  }
+  
+  .badges-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .gallery-scroll-item {
+    flex: 0 0 240px;
+    height: 320px;
+  }
+  
+  .welcome-message {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .badges-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .gallery-scroll-item {
+    flex: 0 0 200px;
+    height: 280px;
+  }
+  
+  .countdown-timer {
+    flex-wrap: wrap;
+  }
+}
+
+/* ========================================
+   ABOUT PAGE - ROMANTIC STORY SECTIONS
+   ======================================== */
+
+.page-header__subtitle {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  color: var(--text-soft);
+  margin-top: 0.5rem;
+}
+
+/* Story Sections */
+.story-section {
+  padding: 6rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.story-section--dark {
+  background: linear-gradient(180deg, rgba(10,6,24,0.95), rgba(4,1,14,0.98));
+}
+
+.story-section--light {
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.05));
+}
+
+.story-section--final {
+  padding-bottom: 4rem;
+}
+
+.story-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.story-container--reverse {
+  direction: rtl;
+}
+
+.story-container--reverse > * {
+  direction: ltr;
+}
+
+.story-chapter {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--glow-gold);
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.story-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 300;
+  background: linear-gradient(135deg, var(--text-main) 50%, var(--glow-pink));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.story-text {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  color: var(--text-soft);
+  line-height: 1.9;
+  margin-bottom: 1.5rem;
+}
+
+.story-quote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  color: var(--glow-gold);
+  line-height: 1.8;
+  padding: 2rem;
+  border-left: 3px solid var(--glow-pink);
+  margin-top: 2rem;
+  background: rgba(255,255,255,0.02);
+  border-radius: 0 16px 16px 0;
+}
+
+.story-image-wrapper {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+
+.story-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.8s var(--ease-out);
+}
+
+.story-image-wrapper:hover .story-image {
+  transform: scale(1.05);
+}
+
+.story-image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,95,160,0.1), rgba(176,110,243,0.1));
+  pointer-events: none;
+}
+
+.story-image-date {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-main);
+  background: rgba(4,1,14,0.8);
+  padding: 0.4rem 1rem;
+  border-radius: 50px;
+  backdrop-filter: blur(10px);
+}
+
+.story-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--glow-pink);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+}
+
+.story-love-letter {
+  background: linear-gradient(135deg, rgba(255,95,160,0.08), rgba(176,110,243,0.08));
+  border: 1px solid rgba(255,95,160,0.2);
+  border-radius: 20px;
+  padding: 2.5rem;
+  margin-top: 2.5rem;
+  position: relative;
+}
+
+.story-love-letter::before {
+  content: '💌';
+  position: absolute;
+  top: -15px;
+  left: 2rem;
+  font-size: 2rem;
+  background: var(--surface);
+  padding: 0 1rem;
+  border-radius: 50%;
+}
+
+.love-letter-text {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text-soft);
+  line-height: 2;
+  white-space: pre-line;
+}
+
+.love-letter-signature {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--glow-gold);
+  display: block;
+  margin-top: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .story-container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  .story-container--reverse {
+    direction: ltr;
+  }
+  
+  .story-stats {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .story-love-letter {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .story-section {
+    padding: 4rem 1.5rem;
+  }
+  
+  .story-title {
+    font-size: 1.5rem;
+  }
+  
+  .story-text {
+    font-size: 0.95rem;
+  }
+  
+  .story-quote {
+    padding: 1.5rem;
+    font-size: 1.1rem;
+  }
+}
